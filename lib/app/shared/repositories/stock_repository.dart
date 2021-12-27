@@ -17,7 +17,7 @@ class StockRepository {
   Future<Stock?> getStock(String code) async {
     var stockUrl = "$url&symbol=$code";
     var response = await http.get(Uri.parse(stockUrl));
-
+    
     if (response.statusCode == 200) {
       var responseData = convert.jsonDecode(response.body);
       if (responseData is Map) {

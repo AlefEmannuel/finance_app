@@ -18,6 +18,9 @@ abstract class _HomeControllerBase with Store {
   String search = "";
 
   @observable
+  bool notFound = false;
+
+  @observable
   ObservableList<Stock> stocks = ObservableList.of([]);
 
   void clearSearch() {
@@ -29,7 +32,7 @@ abstract class _HomeControllerBase with Store {
     print(search);
   }
 
-  Future<void> getStockByCode() async {
+  Future<Stock?> getStockByCode() async {
     Stock? stock = await repository.getStock(search.toUpperCase());
     clearSearch();
     if (stock != null) {

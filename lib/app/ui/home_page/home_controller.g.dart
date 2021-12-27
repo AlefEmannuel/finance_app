@@ -24,6 +24,21 @@ mixin _$HomeController on _HomeControllerBase, Store {
     });
   }
 
+  final _$notFoundAtom = Atom(name: '_HomeControllerBase.notFound');
+
+  @override
+  bool get notFound {
+    _$notFoundAtom.reportRead();
+    return super.notFound;
+  }
+
+  @override
+  set notFound(bool value) {
+    _$notFoundAtom.reportWrite(value, super.notFound, () {
+      super.notFound = value;
+    });
+  }
+
   final _$stocksAtom = Atom(name: '_HomeControllerBase.stocks');
 
   @override
@@ -43,6 +58,7 @@ mixin _$HomeController on _HomeControllerBase, Store {
   String toString() {
     return '''
 search: ${search},
+notFound: ${notFound},
 stocks: ${stocks}
     ''';
   }
