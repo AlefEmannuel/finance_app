@@ -18,13 +18,16 @@ abstract class _HomeControllerBase with Store {
   String search = "";
 
   @observable
-  bool notFound = false;
+  bool loading = false;
+
+  @observable
+  bool repeatedStock = false;
 
   @observable
   ObservableList<Stock> stocks = ObservableList.of([]);
 
   void clearSearch() {
-    search = "";
+    setSearch("");
   }
 
   void setSearch(String text) {
@@ -33,13 +36,28 @@ abstract class _HomeControllerBase with Store {
   }
 
   Future<Stock?> getStockByCode() async {
+    loading = true;
     Stock? stock = await repository.getStock(search.toUpperCase());
+    loading = false;
     clearSearch();
     if (stock != null) {
-      stocks.add(stock);
+      if (!searchRepeatedStock(stock)) {
+        stocks.add(stock);
+        return stock;
+      }else{
+        repeatedStock = true;
+        return stock;
+      }
     } else {
       return null;
     }
+  }
+
+  bool searchRepeatedStock(Stock stock) {
+    for (var item in stocks) {
+      if (item.symbol == stock.symbol) return true;
+    }
+    return false;
   }
 
   Color getColorCard(double price) {

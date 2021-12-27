@@ -24,18 +24,18 @@ mixin _$HomeController on _HomeControllerBase, Store {
     });
   }
 
-  final _$notFoundAtom = Atom(name: '_HomeControllerBase.notFound');
+  final _$loadingAtom = Atom(name: '_HomeControllerBase.loading');
 
   @override
-  bool get notFound {
-    _$notFoundAtom.reportRead();
-    return super.notFound;
+  bool get loading {
+    _$loadingAtom.reportRead();
+    return super.loading;
   }
 
   @override
-  set notFound(bool value) {
-    _$notFoundAtom.reportWrite(value, super.notFound, () {
-      super.notFound = value;
+  set loading(bool value) {
+    _$loadingAtom.reportWrite(value, super.loading, () {
+      super.loading = value;
     });
   }
 
@@ -58,7 +58,7 @@ mixin _$HomeController on _HomeControllerBase, Store {
   String toString() {
     return '''
 search: ${search},
-notFound: ${notFound},
+loading: ${loading},
 stocks: ${stocks}
     ''';
   }

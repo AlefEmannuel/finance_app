@@ -29,10 +29,21 @@ class _HomePageState extends State<HomePage> {
           elevation: 0),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
-          var stock = await widget.controller.getStockByCode();
+          Stock? stock = await widget.controller.getStockByCode();
+          widget.controller.clearSearch();
           if (stock == null) {
-            ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text('Está ação não existe'), backgroundColor: Colors.red,));
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                backgroundColor: Colors.red,
+                content: Text('Ação não encontrada, tente novamente')));
+          } else if (stock != null && widget.controller.repeatedStock) {
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                backgroundColor: Colors.amber,
+                content: Text('A ação já foi adicionada')));
+            widget.controller.repeatedStock = false;
+          } else {
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                backgroundColor: Colors.green,
+                content: Text('Ação adicionada')));
           }
         },
         backgroundColor: AppTheme.dark3,
@@ -73,6 +84,22 @@ class _HomePageState extends State<HomePage> {
                     SizedBox(
                       height: 30,
                     ),
+                    Observer(builder: (_) {
+                      if (widget.controller.loading) {
+                        return Column(
+                          children: [
+                            CircularProgressIndicator(
+                              semanticsLabel: "Carregando",
+                            ),
+                            SizedBox(
+                              height: 30,
+                            ),
+                          ],
+                        );
+                      } else {
+                        return SizedBox();
+                      }
+                    }),
                     Container(
                       width: width * 0.9,
                       child: Observer(builder: (_) {
@@ -95,6 +122,7 @@ class _HomePageState extends State<HomePage> {
                                     // Then show a snackbar.
                                     ScaffoldMessenger.of(context).showSnackBar(
                                         SnackBar(
+                                            backgroundColor: Colors.red,
                                             content: Text(
                                                 '${stock.symbol} removido')));
                                   },

@@ -17,15 +17,19 @@ class StockRepository {
   Future<Stock?> getStock(String code) async {
     var stockUrl = "$url&symbol=$code";
     var response = await http.get(Uri.parse(stockUrl));
-    
-    if (response.statusCode == 200) {
-      var responseData = convert.jsonDecode(response.body);
-      if (responseData is Map) {
-        final Stock stock = Stock.fromJson(responseData['results'][code]);
-        return stock;
-      }
-    } else {
+
+    if (response.body.contains("error")) {
       return null;
+    } else {
+      if (response.statusCode == 200) {
+        var responseData = convert.jsonDecode(response.body);
+        if (responseData is Map) {
+          final Stock stock = Stock.fromJson(responseData['results'][code]);
+          return stock;
+        }
+      } else {
+        return null;
+      }
     }
   }
 }
