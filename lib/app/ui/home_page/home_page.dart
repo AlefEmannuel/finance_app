@@ -29,22 +29,25 @@ class _HomePageState extends State<HomePage> {
           elevation: 0),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
-          Stock? stock = await widget.controller.getStockByCode();
-          widget.controller.clearSearch();
-          if (stock == null) {
-            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                backgroundColor: Colors.red,
-                content: Text('Ação não encontrada, tente novamente')));
-          } else if (stock != null && widget.controller.repeatedStock) {
-            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                backgroundColor: Colors.amber,
-                content: Text('A ação já foi adicionada')));
-            widget.controller.repeatedStock = false;
-          } else {
-            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                backgroundColor: Colors.green,
-                content: Text('Ação adicionada')));
-          }
+          setState(() async {
+            Stock? stock = await widget.controller.getStockByCode();
+            widget.controller.clearSearch();
+            myController.clear();
+            if (stock == null) {
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                  backgroundColor: Colors.red,
+                  content: Text('Ação não encontrada, tente novamente')));
+            } else if (stock != null && widget.controller.repeatedStock) {
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                  backgroundColor: Colors.amber,
+                  content: Text('A ação já foi adicionada')));
+              widget.controller.repeatedStock = false;
+            } else {
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                  backgroundColor: Colors.green,
+                  content: Text('Ação adicionada')));
+            }
+          });
         },
         backgroundColor: AppTheme.dark3,
         child: const Icon(Icons.add),

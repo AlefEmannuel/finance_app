@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class TextStyleTheme{
   TextStyleTheme._();
 
-  static const title1 = TextStyle(color: AppTheme.white, fontSize: 20, fontFamily: "Poppins", fontWeight: FontWeight.bold);
+  static const title1 = TextStyle(color: AppTheme.white, fontSize: 18, fontFamily: "Poppins", fontWeight: FontWeight.bold);
 
   static const title2 = TextStyle(color: AppTheme.white, fontSize: 20, fontFamily: "Poppins");
 

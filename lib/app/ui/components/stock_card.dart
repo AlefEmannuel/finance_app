@@ -57,7 +57,7 @@ class StockCard extends StatelessWidget {
             ],
           ),
           SizedBox(
-            width: 50,
+            width: 20,
           ),
           Container(
             alignment: Alignment.centerRight,
