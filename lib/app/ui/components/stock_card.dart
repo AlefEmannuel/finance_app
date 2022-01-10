@@ -31,7 +31,7 @@ class StockCard extends StatelessWidget {
           borderRadius: BorderRadius.all(Radius.circular(7)),
           border: Border.all(color: AppTheme.green1)),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           SizedBox(width: 15),
           BoxInitials(
@@ -39,9 +39,6 @@ class StockCard extends StatelessWidget {
             height: height,
             initials: initials,
             boxInitialColor: boxInitialColor,
-          ),
-          SizedBox(
-            width: 10,
           ),
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -58,7 +55,7 @@ class StockCard extends StatelessWidget {
             ],
           ),
           SizedBox(
-            width: 90,
+            width: 65,
           ),
           Container(
             alignment: Alignment.centerRight,
@@ -66,7 +63,10 @@ class StockCard extends StatelessWidget {
               "R\$: $price",
               style: TextStyleTheme.title1,
             ),
-          )
+          ),
+           SizedBox(
+            width: 15,
+          ),
         ],
       ),
     );
