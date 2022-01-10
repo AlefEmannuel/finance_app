@@ -31,6 +31,7 @@ class StockCard extends StatelessWidget {
           borderRadius: BorderRadius.all(Radius.circular(7)),
           border: Border.all(color: AppTheme.green1)),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           SizedBox(width: 15),
           BoxInitials(
@@ -57,7 +58,7 @@ class StockCard extends StatelessWidget {
             ],
           ),
           SizedBox(
-            width: 20,
+            width: 90,
           ),
           Container(
             alignment: Alignment.centerRight,
