@@ -33,7 +33,6 @@ class StockCard extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          SizedBox(width: 15),
           BoxInitials(
             width: width,
             height: height,
